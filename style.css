@@ -1,0 +1,174 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 0;
+  background: #608081;
+  overflow: hidden;
+}
+
+.toggle {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: 20rem;
+  height: 10rem;
+  border-radius: 5rem;
+  background: linear-gradient(90deg, #80c0a1 -50%,
+   #30d031 150%);
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+.toggle:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 5rem;
+  overflow: hidden;
+}
+.toggle:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 5rem;
+  box-shadow: inset 0 0.1rem 0.4rem 0 black;
+  z-index: 1;
+  transition: all 0.5s ease;
+}
+.toggle:hover:after {
+  box-shadow: inset 0 0.1rem 0.6rem 0 black;
+}
+.toggle__ball {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  width: 8rem;
+  height: 8rem;
+  background: radial-gradient(circle at 50% 10%, #fff, #000038 120%);
+  background-size: 200% 100%;
+  background-position: 0 0;
+  border-radius: 50%;
+  box-shadow: -0.5rem 0.5rem 1rem 0.5rem rgba(0, 0, 56, 0.5);
+  overflow: hidden;
+  transition: all 1s cubic-bezier(0.59, 0.3, 0.5, 1.4);
+  transition-delay: 0.75s;
+}
+.toggle__ball:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-position: 0 0;
+  background-size: 1rem 1rem;
+  background-image: radial-gradient(circle, #000038 -400%, #fff 0.5rem);
+  opacity: 0.5;
+  transform: rotate(45deg);
+  transition: background-position 1s cubic-bezier(0.59, 0.3, 0.5, 1.4);
+  transition-delay: 0.75s;
+}
+.toggle--active .toggle__ball {
+  left: 11rem;
+  background-position: 100% 0;
+  box-shadow: 0.5rem 0.5rem 1rem 0.5rem rgba(0, 0, 56, 0.5);
+}
+.toggle--active .toggle__ball:before {
+  background-position: 100% -100%;
+}
+.toggle--no-events {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.stick {
+  position: absolute;
+  z-index: 1;
+  top: -16rem;
+  left: calc(50% - 0.75rem);
+  width: 1.5rem;
+  height: 50vh;
+  transform-origin: top;
+  transition: all 0.5s ease;
+}
+.stick:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 98%;
+  background: linear-gradient(90deg, #000038 -120%, 
+  #c3c3d3 40%, #c3c3d3 60%, #000038 220%);
+  border-radius: 0.5rem;
+}
+.stick__head {
+  position: absolute;
+  bottom: -10rem;
+  left: -0.75rem;
+  width: 3rem;
+  height: 12rem;
+  border-radius: 60% 60% 1rem 3rem;
+  background: linear-gradient(90deg, #000038 -50%, 
+  #c3c3d3 25%, #c3c3d3 75%, #000038 150%);
+  box-shadow: 0 0.5rem 1rem 0.5rem rgba(0, 0, 56, 0.2);
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+.stick__head:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 20%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(-45deg, transparent 
+  10%, #fff 30%, transparent 80%);
+}
+.stick--left {
+  top: -4rem;
+  left: calc(50% - 9.5rem);
+  transform: rotate(20deg);
+  animation: hit-left;
+  animation-duration: 0.5s;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+}
+@keyframes hit-left {
+  0% {
+    transform: rotate(20deg);
+  }
+  100% {
+    transform: rotate(3deg);
+  }
+}
+.stick--left .stick__head {
+  box-shadow: -0.5rem 1rem 1rem 0.5rem rgba(0, 0, 56, 0.2);
+}
+.stick--right {
+  top: -4rem;
+  left: calc(50% + 8rem);
+  transform: rotate(-20deg);
+  animation: hit-right;
+  animation-duration: 0.5s;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+}
+@keyframes hit-right {
+  0% {
+    transform: rotate(-20deg);
+  }
+  100% {
+    transform: rotate(-3deg);
+  }
+}
+.stick--right .stick__head {
+  box-shadow: 0.5rem 1rem 1rem 0.5rem rgba(0, 0, 56, 0.2);
+}
